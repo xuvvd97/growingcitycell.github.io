@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!--META & TITLE-->
+    <meta charset="utf-8">
+    <meta name="author" content="Group3">
+    <meta name="author" content="Linan Zhu, Minghang Hong, Yuyan Hu, Tommy Sin">
+    <title>The Growing City-Cell</title>
+
+
+    <!--FULLPAGE-->
+    <link rel="stylesheet" type="text/css" href="https://alvarotrigo.com/fullPage/jquery.fullPage.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://alvarotrigo.com/fullPage/jquery.fullpage.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+
+    <!--STYLE SHEET-->
+    <link rel="stylesheet" type="text/css" href="style1.css" />
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=East Sea Dokdo' rel='stylesheet'>
+
+
+    <script>
+        //fullPage settings
+        $(function () {
+            $('#myPage').fullpage({
+                sectionsColor: ['#000000', '#F6F3F7', '#F6F3F7', '#000000', '#D7D9E0', '#F6F3F7','#D7D9E0','#F6F3F7'], // page background
+                anchors: ['page1', 'page2', 'page3', 'page4', 'page5', 'page6', 'page7', 'page8', 'page9'],
+                menu: '#menu',
+            });
+        });
+    </script>
+    <style>
+        .section1 {
+            background-size: cover;
+            background-image: url(image/webwxgetmsgimg.jpeg);
+        }
+
+        .section8 {
+            background-size: cover;
+            background-image: url(image/final.jpg);
+        }
+
+        #menu {
+            width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            left: 0;
+            right: 0;
+        }
+
+        #menu li {
+            float: left;
+        }
+
+        #items {
+            border: 0;
+        }
+
+        /* Arrow style */
+        .fp-controlArrow {
+            top: 50%;
+        }
+
+        .fp-controlArrow.fp-prev {
+            left: 0;
+            border: none;
+            width: 50px;
+            height: 50px;
+            background: url(https://working-hour-culture.github.io/images/arrow_left.png) no-repeat;
+            background-color: #cccccc;
+        }
+
+        .fp-controlArrow.fp-next {
+            right: 0;
+            border: none;
+            width: 50px;
+            height: 50px;
+            background: url(https://working-hour-culture.github.io/images/arrow_right.png) no-repeat;
+            background-color: #cccccc;
+        }
+
+        .downarrow {
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            right: 0;
+            margin-left: auto;
+            margin-right: auto;
+            width: 2vw;
+            animation-delay: 7s;
+            animation: slidefromBottom 2s;
+        }
+
+        #menu li img {
+            width: 2.0vw;
+        }
+
+        #menu li {
+            width: 2.5vw;
+            height: 2.5vw;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!--NAVIGATION TABS-->
+    <!--free icons from: https://www.flaticon.com-->
+
+    <ul id="menu">
+        <li data-menuanchor="page1" class="active"><a href="#page1" title="Top"><img src="icon/home.svg"></a></li>
+
+        <li data-menuanchor="page2"><a href="#page2" title="About"><img src="icon/team.png"></a></li>
+
+        <li data-menuanchor="page3"><a href="#page3" title="Index"><img src="icon/text-format.png"></a></li>
+
+        <li data-menuanchor="page4"><a href="#page4" title="World Urbanization Percentage"><img
+                    src="icon/overpopulation.png"></a></li>
+        <li data-menuanchor="page5"><a href="#page5" title="Urban Agglomerations"><img
+                    src="icon/overpopulation.png"></a></li>
+
+        <li data-menuanchor="page6"><a href="#page6" title="Carbon Dioxide Emissions"><img src="icon/co2.png"></a></li>
+
+        <li data-menuanchor="page7"><a href="#page7" title="Transportation Map"><img src="icon/delivery-truck.png"></a></li>
+
+        <li data-menuanchor="page8"><a href="#page8" title="Transportation Chart"><img
+                    src="icon/delivery-truck.png"></a></li>
+
+        <li data-menuanchor="page9"><a href="#page9" title="reference"><img src="icon/link.svg"></a></li>
+    </ul>
+
+
+    <!-- PAGES -->
+    <div id="myPage">
+        <!-- Page1: INTRO-->
+        <div class="section section1">
+            <div class="title-text"><span style="color: #ffffff; font-size: 5.3vw;">The Growing City-Cell</span> </div>
+
+            <br />
+            <br />
+            <br />
+            <br />
+
+            <div class='title-intro' style="background-color:rgba(204,204,204,0.5);"> <span style="color: #ffffff; font-size: 2.3vw; 
+                ">The Growing City-Cell shows the
+                    upward growth trajectory of cities, the increasing large urban agglomeration patterns , the patterns
+                    of emissions over time alongside city-cell growth and the evolving transport networks </span> </div>
+
+            <br />
+
+            <div class="title-author"> <span style="color: #ffffff; font-size: 1.0vw;"> CASA 2020 Group3- Group Mini
+                    Project: Digital Visualisation</span> </div>
+
+        </div>
+
+
+
+        <!-- Page2: about-->
+        <div class="section section2">
+            <!--      <section id="projects" class="projects-section bg-light">-->
+            <table>
+                <tr>
+                    <td style="width: 50%;"><img style="width: 80%;" src="image/City.jpeg"></td>
+                    <td style="width: 50%;">
+                        <div style="color: #000000; font-size:1.5vw; text-align: justify; padding-left: 50px; padding-right: 50px；"> The
+                            Growing City-Cell, highlights the similarities of a city to a cell, but also to show cities’
+                            growth over time. It shows the upward growth trajectory of cities (growth), the increasing
+                            large urban agglomeration patterns (accumulation of resources / nutrition), the patterns of
+                            emissions over time alongside city-cell growth (excretion / waste) and the evolving
+                            transport networks (movement)</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 50%;">
+                        <div style="color: #000000;  text-align: justify;font-size:1.5vw;padding-left: 50px; padding-right: 50px；"> How does
+                            the growing city cell help to explore urban studies?<br />
+                            This study highlights similarities between urban studies and cellular biology and explains
+                            different perspective of understanding city. These contributes to revealing the potential of
+                            shared insights on cells/cities. This is not a value-judgment on this growth of the
+                            city-cell, but providing an expository take on it through thematic visualisations </div>
+                    </td>
+                    <td style="width: 50%;"><img style="width: 80%;" src="image/Japan.jpeg"></td>
+                </tr>
+            </table>
+
+        </div>
+
+        <!-- Page3: catelogue-->
+        <div class="section section3">
+            <ul id="items">
+
+                <li>
+                    <div class='items'>
+                        <a class='img'><img src="icon/overpopulation.png"></a>
+
+                        <a class="subtitles">
+
+                            <span style="color: #000000; font-size: 2.0vw;">
+                                <h3>Urban Population</h3>
+                            </span>
+                            <p> <span style="color: #000000; font-size: 1.0vw;">
+                                    World Urbanization Percentage <br />
+                                    Population of Urban Agglomerations </span>
+
+                            </p>
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <div class='items'>
+                        <a class='img'><img src="icon/CO2.png"></a>
+                        <a class="subtitles">
+                            <span style="color: #000000; font-size: 2.0vw;">
+                                <h3>Carbon Dioxide Emissions</h3>
+                            </span>
+                            <p><span style="color: #000000; font-size: 1.0vw;"> Total emission
+                                    <br />
+                                    Emission per capita
+                                    <br />
+                                    Emission from Transportation</span>
+                            </p>
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <div class='items'>
+                        <a class='img'><img src="icon/delivery-truck.png"></a>
+                        <a class="subtitles">
+                            <span style="color: #000000; font-size: 2.0vw;">
+                                <h3>Transportation in China</h3>
+                            </span>
+                            <p> <span style="color: #000000; font-size: 1.0vw;"> Railway
+                                    <br />
+                                    Expressway
+                                    <br />
+                                    Urban Rail Transit System</span>
+                            </p>
+
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <div class='items'>
+                        <a class='img'><img src="icon/link.svg"></a>
+
+                        <a class="subtitles">
+
+                            <span style="color: #000000; font-size: 2.0vw;">
+                                <h3>Reference</h3>
+                            </span>
+                            <p> <span style="color: #000000; font-size: 1.0vw;">
+                                    Our team </span>
+
+                            </p>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Page4: population-->
+        <div class="section section4">
+
+            <!--Map1: World Urbanization Percentage -->
+            <div class="slide">
+                <iframe src="urbanisation%20percentage/work_progress.html" height="100%" width="100%" frameBorder="0"
+                    scrolling="no"></iframe>
+            </div>
+        </div>
+
+        <!-- Page5: population-->
+        <div class="section section4">
+            <!--Map2: Population of Urban Agglomerations (the place with 300,000 Inhabitants or More)-->
+            <div class="slide">
+                <iframe src="urban_agglomeration/urban_agglomeration.html" height="100%" width="100%" frameBorder="0"
+                    scrolling="no"></iframe>
+            </div>
+        </div>
+        <!-- Page6: Co2-->
+        <div class="section section6">
+
+            <!--MAP-->
+            <iframe src="emission/emission.html" height="100%" width="100%" frameBorder="0" scrolling="no"></iframe>
+
+        </div>
+
+
+        <!-- Page7: transport-->
+        <div class="section section7">
+
+            <!--MAP-->
+            <iframe src="Transportation/transport.html" height="100%" width="100%" frameBorder="0"
+                scrolling="no"></iframe>
+
+        </div>
+
+
+        <!-- Page8:transport2 chart-->
+        <div class="section section7">
+            <!--1:railways – lollipop chart-->
+
+            <div class="slide">
+
+                <iframe src="Transportation/Lollipop-railway.html" height="75%" width="100%" frameBorder="0"
+                    scrolling="no"></iframe>
+
+               <div style="color: #000000;  text-align: justify;font-size:1.3vw;padding-left: 50px;padding-right:90px ；padding-top:1000px"> We are using the lollipop chart to visualise the lengths of railways. We can use buttons to choose different year to find how provinces or cities vary in the same year.<br/>
+            If we choose 2000 and 2018. We can find in 2010, the total lengths in most provinces and cities were less than 3000 kilometers. However, in 2018 most areas’ total lengths became larger than 5000 kilometers. It is a great growth. </div>
+
+
+            </div>
+            <!--2.	expressways – circular plot-->
+            <div class="slide">
+
+                <iframe src="Transportation/Circular-2008highway.html" height="60%" width="45%" frameBorder="0"
+                    scrolling="no"></iframe>
+
+                <iframe src="Transportation/Circular-2018highway.html" height="60%" width="45%" frameBorder="0"
+                    scrolling="no"> </iframe>
+
+                <div style="color: #000000;  text-align: justify;font-size:1.3vw;padding-left: 90px;padding-right:90px；padding-top:600px"> We are using the
+                    circular bar plot, which is different from the traditional bar plot and displays data in a circle
+                    rather than a horizontal way to visualise lengths of expressways among provinces.<br/>
+
+                    Here are the plots in 2008 and 2018. We can find nearly all provinces or cities have extended their
+                    expressway’s lines. The length of Shanghai, Hainan, Tanjin, and Beijing increased little. It might
+                    because the expressways in Shanghai and Beijing had been already developed before, the total land
+                    area in Tianjin is small, and Hainan is an island, which is hard to build expressways to be
+                    connected with other cities. </div>
+
+
+            </div>
+
+            <!--3.	urban rail transit system – line chart-->
+            <div class="slide">
+                <iframe src="Transportation/Linechart-urban%20rail%20transit.html" height="70%" width="90%"
+                    frameBorder="0" scrolling="no"></iframe>
+               
+               <div style="color: #000000;  text-align: justify;font-size:1.3vw;padding-left: 50px;padding-right:90px；padding-bottom:50px"> Urban Rail Transit System might include subways and trams.<br/>
+                   We can use the box in line chart to choose different provinces or cities and find how one area changed in the different years and compare the lengths and development between them.<br/>
+                   Here we chose Hubei Province and Shanghai. We can find Hubei started to develop the system from 2009 and was greatly improved from 2012. Shanghai already had the system in 2006 and the length grew slowly after 2010 because it has been developed. In 2018, Hubei Province covered an area nearly 30 times the size of Shanghai, but its total length was only half that of Shanghai. </div>
+            </div>
+        </div>
+
+        <!-- Page9: Reference-->
+        <div class="section section8">
+
+            <img src="image/CASALogo.png" height="180" width="180">
+            <div class="title-text"><span style="color: #ffffff; font-size: 5.3vw;">The Growing City-Cell</span> </div>
+            <br />
+            <br />CASA 2020 Group3- Group Mini
+            Project: Digital Visualisation
+            <br />
+            <br />
+
+            <div class='title-intro' style="background-color:rgba(204,204,204,0.5);"> <span style="color: #ffffff; font-size: 1.3vw; 
+                ">Creators : Linan Zhu, Minghang Hong, Yuyan Hu, Tommy Sin
+                    <br />Map engine : <a href="https://www.mapbox.com/" target="_blank"> Mapbox</a></span>
+
+                <br />
+
+
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

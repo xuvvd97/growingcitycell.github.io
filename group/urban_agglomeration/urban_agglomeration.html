@@ -1,0 +1,409 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>CASA0003 Individual Coursework</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.6.1/mapbox-gl.js"></script>
+    <script charset="utf-8" src="https://d3js.org/d3.v4.min.js"></script>
+    <script charset="utf-8" src="https://cdnjs.cloudflare.com/ajax/libs/dimple/2.3.0/dimple.latest.min.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.6.1/mapbox-gl.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="urban_agg_style.css" />
+    
+
+</head>
+    
+    
+<body>
+   
+    <div id="map"></div>
+    <div id='guides'><h>Guidelines</h><p>1. Click the button to change the map;<br /> 2. Use the slider to change the year;<br />3. Move the mouse to the urban agglometration and review the population data of each city;<br />4. Click the country name to zoom to specific country;<br />5. The barchart shows the the number of urban agglomerations with more than 10 million population in each year.</p></div>
+    <div class='map-overlay'>
+        <div class='map-overlay-inner'>
+        
+        <h id = 'title'> Urban Agglomerations </h>
+        <p class="credit">Data Source:  <a href="https://population.un.org/wup/Download/">United Nations</a></p>
+        <table>
+            
+           <tr><td>
+  		<input type="radio" name="layers" id="layer1" value="CO2 per capita" checked><label>Circle Point map</label>
+                 </td>
+         </tr>
+                <tr><td>
+  		<input type="radio" name="layers" id="layer2" value="Transport%"><label>Heatmap </label>
+         </td>
+         </tr> 
+                
+            
+            <tr><td>
+        <input id='slider' type='range' min='0' max='9' step='1' value='7' list='tickmarks'/>
+        <datalist id="tickmarks">
+		  <option value="0" label="1960">
+		  <option value="1">
+		  <option value="2">
+		  <option value="3">
+		  <option value="4" label="1995">
+		  <option value="5">
+		  <option value="6">
+		  <option value="7">
+		  <option value="8">
+		  <option value="9" label="2020">
+		  </datalist>
+		 </td>
+		 <td>
+		  <label id='year'>2010</label>
+         </td>    
+         </tr>
+            
+            
+            </table>
+	    </div>
+    </div>
+    
+    <div class = 'subtitle1'>
+        <h id='area'>Urban Agglomerations</h>
+        <table>
+        <tr><td><p class="cityfly">Zoom To: <a href="#" class="citylink" id="CHN">China</a> &nbsp;<a href="#" class="citylink" id="UK">the United Kingdom</a> &nbsp;<a href="#" class="citylink" id="JP">Japan</a> &nbsp;<a href="#" class="citylink" id="USA">the USA</a> &nbsp;<a href="#" class="citylink" id="India">India</a> &nbsp;<a href="#" class="citylink" id="AUS">Australia</a></p>
+        </table>
+    </div>
+    
+    
+    
+    <div id="legend">
+        <p id="legendtitle">Population of Urban Agglomerations ('000)</p>
+    </div>
+     
+    <div id="chartContainer">
+    <p id="charttitle">The number of urban agglomerations with more than 10 million population</p>
+    </div>
+    
+    
+<script>
+    //set the range of time slider
+    var years = [
+        '1960',
+        '1970',
+        '1980',
+        '1990',
+        '1995',
+        '2000',
+        '2005',
+        '2010',
+        '2015',
+        '2020'
+       	
+    ];
+    
+//add the legends for the urban agglomeration 
+    var layers = ['<500', '500-1000', '1000-2000', '2000-3000', '3000-4000','4000-5000','5000-7000','7000-80000' ,">8000"];
+    var colors = ['#FFBA08', '#FAA307', '#F48C06', '#E85D04', '#DC2F02','#D00000','#9D0208','#6A040F','#370617'];
+    
+    for (i = 0; i < layers.length; i++) {
+        var layer = layers[i];
+        var color = colors[i];
+        
+        var item = document.createElement('div');
+        var key = document.createElement('span');
+        key.className = 'legend-key';
+        key.style.backgroundColor = color;
+
+        var value = document.createElement('span');
+        value.innerHTML = layer;
+        item.appendChild(key);
+        item.appendChild(value);
+        legend.appendChild(item);
+    }
+   
+//add the base map from mapbox
+    mapboxgl.accessToken = 'pk.eyJ1IjoibWluZ2hhbmdobWgiLCJhIjoiY2s1cDg5MmszMGN5OTNlcGl3ank5ODltYiJ9.uY7dVIUnaNyHDYAfAR26-Q';
+
+	var map = new mapboxgl.Map({
+		container: 'map', 
+		style: 'mapbox://styles/minghanghmh/ckakowa3e32as1ipj7pyu77jk', // stylesheet location
+		center: [115, 30], // starting position [lng, lat]
+		zoom: 3.5, // starting zoom
+        pitch: 5
+	});
+    
+    
+    map.on('load', function() {   
+        map.addControl(new mapboxgl.NavigationControl());
+        
+        //this function is for the time slider of circle point map   
+        function setYear(year) { 
+                // Set the label to the correct year
+                document.getElementById('year').textContent = years[year];
+        
+                var pp = map.getPaintProperty('city','circle-radius');
+                var pp1 = map.getPaintProperty('city','circle-color');
+       
+                console.log(pp);
+                pp.property = "X" + years[year];
+                pp1.property = "X" + years[year];
+
+                map.setPaintProperty('city','circle-radius',pp);
+                map.setPaintProperty('city','circle-color',pp1);
+
+                console.log(map.getPaintProperty('city','circle-radius'));
+
+                map.setLayoutProperty('city', 'visibility', 'none');
+                map.setLayoutProperty('city', 'visibility', 'visible');
+
+                var yearcol = "X" + String(years[year]);
+                var textfield = "{" + yearcol + "}m";
+
+                console.log(textfield);
+
+                map.setLayoutProperty('labels', 'text-field', textfield);
+                var filters = ['>', yearcol, 30];
+                map.setFilter('labels', filters);
+            }
+        
+        
+        //this function is for the time slider of heatmap  
+            function setYear1(year) {
+                // Set the label to the correct year
+                document.getElementById('year').textContent = years[year];
+
+                var pp = map.getPaintProperty('heatmap1','heatmap-radius');
+                var pp1 = map.getPaintProperty('heatmap1','heatmap-color');
+
+                console.log(pp);
+                pp.property = "X" + years[year];
+                pp1.property = "X" + years[year];
+
+                map.setPaintProperty('heatmap1','heatmap-radius',pp);
+                map.setPaintProperty('heatmap1','heatmap-radius',pp1);
+
+                console.log(map.getPaintProperty('heatmap1','heatmap-radius'));
+
+                map.setLayoutProperty('heatmap1', 'visibility', 'none');
+                map.setLayoutProperty('heatmap1', 'visibility', 'visible');
+
+                var yearcol = "X" + String(years[year]);
+                var textfield = "{" + yearcol + "}m";
+
+                console.log(textfield);
+
+                map.setLayoutProperty('labels', 'text-field', textfield);
+                var filters = ['>', yearcol, 30];
+                map.setFilter('labels', filters);
+            }
+        
+        
+        
+        //add the circle and paint
+        map.addLayer({
+            id: 'city',
+            type: 'circle',
+            source: {
+                type: 'vector',
+                url: 'mapbox://minghanghmh.d2fnca9t' // Your Mapbox tileset Map ID
+          },
+            'source-layer': 'city-8g5i1i', // name of tilesets
+            'layout': {
+                'visibility': 'visible'
+            },
+             'paint': {
+                 
+               
+            'circle-color': {
+              property: 'X2015', // this will be your density property form you geojson
+              stops: [
+                  [0,'#ffffff'],
+                  [500, '#FFBA08'],
+                  [1000,"#FAA307"],
+                  [2000, '#F48C06'],
+                  [3000, '#E85D04'],
+                  [4000, '#DC2F02'],
+                  [5000,'#D00000'],
+                  [7000,'#9D0208'],
+                  [8000,'#6A040F'],
+                  [10000,'#370617']
+              ]
+            },
+            'circle-opacity': 1,
+             'circle-radius':{ 
+                 property: 'X2015', // this will be your density property form you geojson
+              stops: [
+                  [0,0],
+                  [500, 2.5],
+                  [1000,5],
+                  [2000, 7.5],
+                  [3000, 10],
+                  [4000, 12.5],
+                  [5000,15],
+                  [7000,17.5],
+                  [8000,20],
+                  [10000,25]
+              ]
+                 
+             }
+          }       
+        });
+        
+        //add the layer of heatmap
+            map.addLayer({
+              'id': 'heatmap1',
+              'type': 'heatmap',
+               source: {
+               type: 'vector',
+               url: 'mapbox://minghanghmh.d2fnca9t' // Your Mapbox tileset Map ID
+                },  
+              'source-layer': 'city-8g5i1i',  
+                
+
+              'paint': {
+
+               'heatmap-weight': 1,
+
+               'heatmap-intensity': 1,
+
+               'heatmap-color': [
+                  'interpolate',
+                  ['linear'],
+                  ['heatmap-density'],
+                   0,'rgba(0,0,255,0)',
+                   0.1, 'royalblue',
+                   0.3, 'cyan', 
+                   0.5, 'lime', 
+                   0.7, 'yellow', 
+                   1, 'red'
+                    ],
+
+                 'heatmap-radius': {
+                 property: 'X2015', // this will be your density property form you geojson
+                     
+              stops: [
+                  
+                  [500, 3],
+                  [1000,6],
+                  [2000, 9],
+                  [3000, 12],
+                  [4000, 15],
+                  [5000,18],
+                  [7000,21],
+                  [8000,24],
+                  [10000,27]
+              ]
+             },
+             
+                 'heatmap-opacity': 0},
+
+            });
+        
+        
+        
+        d3.csv("popbig10m.csv", function(CityData) {
+            
+            console.log(CityData[1]);
+          
+            var svg = dimple.newSvg("#chartContainer", 430, 220); 
+
+            var myChart = new dimple.chart(svg, CityData);  
+            myChart.setBounds(60, 15, 340, 180);            
+
+            myChart.defaultColors = [
+                new dimple.color("#DC2F02")
+            ];
+
+
+            var x = myChart.addCategoryAxis("x", "year");  // Define the x axis. In this example it is a category axis
+
+            var y = myChart.addMeasureAxis("y", "counts"); // Define the y axis
+            
+            
+
+            var s = myChart.addSeries(null, dimple.plot.bar); // Plot a bar chart of the data
+
+            myChart.draw(500); // Draw the chart. The number is the animation delay in miliseconds
+
+            svg.selectAll("path.domain").style("stroke", "#CCC"); 
+            svg.selectAll("g.tick line").style("stroke", "#CCC");
+
+      });
+        
+
+        document.getElementById('slider').addEventListener('input', function(e) {
+                var year = parseInt(e.target.value);
+                setYear(year);
+                setYear1(year);
+            
+                });
+        
+       
+        document.getElementById("layer1").addEventListener("click", function(){
+            map.setPaintProperty('city','circle-opacity',0.95);    
+            map.setPaintProperty('heatmap1','heatmap-opacity',0);        //uncorrelated layer set opacity '0'
+            legend.style.opacity=1;
+            chartContainer.style.opacity=0.9;
+         
+       });
+        
+
+        document.getElementById("layer2").addEventListener("click", function(){
+            map.setPaintProperty('city','circle-opacity',0);               //uncorrelated layer set opacity '0'
+            map.setPaintProperty('heatmap1','heatmap-opacity',0.95);
+    
+            legend.style.opacity=0;                                           //hide the legend
+            chartContainer.style.opacity=0;                                        //hide the chart
+});
+
+        
+        var x1 = document.getElementsByClassName('citylink');
+        var i;
+		for (i = 0; i < x1.length; i++) {
+			x1[i].addEventListener('click', function(e) {
+
+				var lat,long;
+
+				switch(e.target.id) {
+					case "CHN": long=106.61; lat=36.2; zoom=3.5; break;           //zoom to specific country, different coutry have different zoom value because the                                                                     //country area
+					case "UK": long=-1.8365; lat=53.3; zoom=4; break;
+					case "JP": long=144.50; lat=37.81; zoom=4; break;
+					case "USA": long=-99.35; lat=39.89; zoom=3; break;
+					case "India": long=75.78; lat=21.27; zoom=3.5; break;
+					case "AUS": long=136.35; lat=-26.41; zoom=3; break;
+				}
+
+				map.flyTo({
+					center: [long,lat],
+					zoom: zoom,
+					speed: 1,
+					
+					});
+			});
+		}
+        
+  
+            var mypopup = new mapboxgl.Popup({offset:[15,-10],closeButton: false});
+
+           
+            map.on('mouseover', 'city', function (e) {
+                //console.log(e)
+                    mypopup
+                        .setLngLat(e.features[0].geometry.coordinates)
+                        .setHTML("<h3>" + e.features[0].properties.City + "</h3>2020: " + e.features[0].properties.X2020 + " thousands<br />2015: " + e.features[0].properties.X2015 + " thousands<br />2010: " + e.features[0].properties.X2010 + " thousands<br />2005: " + e.features[0].properties.X2005 + " thousands<br />2000: " + e.features[0].properties.X2000 + " thousands<br />1995: " + e.features[0].properties.X1995 + " thousands<br />1990: " + e.features[0].properties.X1990 + " thousands<br />1980: " + e.features[0].properties.X1980 + " thousands<br />1970: " + e.features[0].properties.X1970 + " thousands<br />1960: " + e.features[0].properties.X1960 + " thousands")
+                        .addTo(map);
+                });
+
+            // Change the cursor to a pointer when the mouse is over the stations layer.
+            map.on('mouseenter', 'city', function () {
+                  map.getCanvas().style.cursor = 'pointer';
+            });
+
+            // Change it back to a pointer when it leaves and remove the popup window.
+            map.on('mouseleave', 'city', function () {
+                map.getCanvas().style.cursor = '';
+                mypopup.remove();
+            });
+        
+        
+        
+        })
+              
+ 
+</script>
+        
+        
+  </body>
+</html>

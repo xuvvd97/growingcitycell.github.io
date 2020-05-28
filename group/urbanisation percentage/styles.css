@@ -1,0 +1,157 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+h2,
+h3 {
+  margin: 10px;
+  font-size: 1.2em;
+}
+
+h3 {
+  font-size: 1em;
+}
+
+p {
+  font-size: 0.85em;
+  margin: 10px;
+  text-align: left;
+}
+
+/**
+* Create a position for the map
+* on the page */
+#map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+/**
+* Set rules for how the map overlays
+* (information box and legend) will be displayed
+* on the page. */
+.map-overlay {
+  position: absolute;
+  bottom:25px;
+  right: 0;
+  background: rgba(255, 255, 255, 0.8);
+  margin-right: 20px;
+  font-family: Arial, sans-serif;
+  overflow: auto;  
+  border-radius: 3px;
+}
+
+#features {
+  top: 0;
+  height: 200px;
+  margin-top: 20px;
+  width: 250px;
+}
+
+#legend {
+  bottom:150px;
+  padding: 10px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  line-height: 18px;
+  height: 150px;
+  margin-bottom: 40px;
+  width: 100px;
+}
+
+.legend-key {
+  display: inline-block;
+  border-radius: 20%;
+  width: 10px;
+  height: 10px;
+  margin-right: 5px;
+}
+
+.graph {position: absolute; top: 50px; left: 0; z-index:10; width: 450px;}
+
+.mapboxgl-popup {
+min-width: 300px;
+font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+}
+        
+     
+#chartContainer {width: 480px; margin: auto;}
+#chartContainer p {margin-left: 10px; margin-bottom: 5px; margin-top: 0; padding: 0;}
+#charttitle {font: bold 14px  Verdana, sans-serif;}
+
+
+
+
+
+#analysiscontent {
+	display: none;
+	clear: both;
+	overflow: auto;
+	max-height: 394px;
+	min-width: 390px;
+	padding: 0 15px 0 25px;
+}
+
+#selectintro {
+	font: normal 14px Verdana, Arial, sans-serif;
+	line-height: 100%;
+	margin: 0 0 5px 0;
+	padding: 0;
+}
+
+#analysiscontent select {
+	font: bold 15px Tahoma, Arial, sans-serif;
+	line-height: 150%;
+	margin: 0 0 10px 0;
+	padding: 3px 5px 3px 5px;
+	color: #333;
+}
+
+
+
+#analysiscontent table {
+	width: 360px;
+	font: normal 14px Verdana, Arial, sans-serif;
+	line-height: 120%;
+}
+
+#analysiscontent table tr td {
+	padding: 2px 0 2px 0;
+	background: #f9f9f9;
+	text-align: center;
+}
+
+#analysiscontent table tr.header td {
+	padding: 5px 0 5px 0;
+	font: bold 14px Verdana, Arial, sans-serif;
+	background: #6c909c;
+	color: #fff;
+}
+
+
+.graph2 {position: absolute; bottom: 50px; left: 0; z-index:10; width: 600px;}
+
+
+#chartContainer2 {width: 480px; margin: auto; margin-bottom: 10px; }
+#chartContainer2 p {margin-left: 10px; margin-bottom: 5px; margin-top: 0; padding: 0;}
+#charttitle2 {font: bold 14px  Verdana, sans-serif;}
+
+.map-overlay2 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: rgba(255, 255, 255, 0.8);
+  margin-left: 20px;
+  font-family: Arial, sans-serif;
+  overflow: auto;  
+  border-radius: 3px;
+}
+
+#features2 {
+  top: 0;
+  height: 700px;
+  margin-top: 5px;
+  width: 520px;
+}

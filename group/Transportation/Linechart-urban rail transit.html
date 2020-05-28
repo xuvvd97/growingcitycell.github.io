@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Urban Rail Transit System in China 2006 - 2018 (km)</title>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
+<!--Load the chart libraries. Dimple is built on D3, and you need to also add D3-->
+<script charset="utf-8" src="https://d3js.org/d3.v4.min.js"></script>
+<script charset="utf-8" src="https://cdnjs.cloudflare.com/ajax/libs/dimple/2.3.0/dimple.latest.min.js"></script>
+
+<style>    
+    #chartContainer {width: 800px;  margin-top: 80px; }
+    #chartContainer p {margin-left: 0; margin-bottom: 15px; margin-top: 0; padding: 0;}
+    #charttitle {font: bold 28px  times, cursive;}
+</style>
+
+</head>
+
+    
+<body>
+
+<!--This is the div container for the chart-->
+
+<div id="chartContainer">
+      
+    <p id="charttitle">Urban Rail Transit System Length in China 2006 - 2018 (km)</p>
+    <p id="chartsubhead"> subhead</p>
+    <p><select id="CountryMenu"><option>Change Province Here:</option></select></p>
+
+</div>
+
+
+<script>
+
+
+// First, load the happiness scores data from the CSV file, then create the function to draw the barchart. CountryData is returned as an array containing the CSV data.
+
+      d3.csv("subway.csv", function(CountryData) { // Load the data from the CSV file and create the function
+        
+        var select = document.getElementById("CountryMenu");
+        
+        var chartdata; // Select the input data one-by-one
+
+        for(var i = 0; i < CountryData.length; i++) {
+            var el = document.createElement("option");
+            el.textContent = CountryData[i].Province; // Load the Country column from the CSV file
+            el.value = CountryData[i].Index; // Load the Index column from the CSV file
+            select.appendChild(el);
+            }       
+        
+        function SetCountryData(index) { // Create the function to show the happiness scores
+          
+                console.log(CountryData[index]); // Show the data of the row in the console
+
+                document.getElementById("chartsubhead").innerHTML = "Province name: " + CountryData[index].Province; // Define the chart title with the country names
+
+                // Dimple requires each data point on a time series to be a separate row. Below we insert the happiness data from the Country array into a new array of JSON objects in the required format
+                chartdata = [
+                  { "Year":"2006","Length":(CountryData[index].length2006) },
+                  { "Year":"2007","Length":(CountryData[index].length2007) },
+                  { "Year":"2008","Length":(CountryData[index].length2008) },
+                  { "Year":"2009","Length":(CountryData[index].length2009) },
+                  { "Year":"2010","Length":(CountryData[index].length2010) },
+                  { "Year":"2011","Length":(CountryData[index].length2011) },
+                  { "Year":"2012","Length":(CountryData[index].length2012) },
+                  { "Year":"2013","Length":(CountryData[index].length2013) },
+                  { "Year":"2014","Length":(CountryData[index].length2014) },
+                  { "Year":"2015","Length":(CountryData[index].length2015) },
+                  { "Year":"2016","Length":(CountryData[index].length2016) },
+                  { "Year":"2017","Length":(CountryData[index].length2017) },
+                  { "Year":"2018","Length":(CountryData[index].length2018) },                   
+                ];
+
+        }
+        
+        SetCountryData(0);
+        
+        
+        var svg = dimple.newSvg("#chartContainer", 800, 400); 
+        // The chart is an svg variable assigned to the chartcontainer div. Assign the width and height.
+        
+            
+        var myChart = new dimple.chart(svg, chartdata);  // Create the chart with chartdata as the input data
+        myChart.setBounds(60, 15, 650, 245); // Set the chart bounds within the svg container
+
+        myChart.defaultColors = [
+            new dimple.color("#69b3a2"),
+            new dimple.color("#69b3a2") 
+        ]; // Set the color of the chart
+
+
+        var x = myChart.addTimeAxis("x", "Year", "%Y", "%Y");  
+        // Define the x axis with the title of Year. The latter statements define the date format which we want to be year only
+        x.timeInterval = 1;  // Set the time interval of years
+
+        var y = myChart.addMeasureAxis("y", "Length", "%Y",); // Define the y axis with title of Scores
+        y.ticks = 5; // Set the ticks
+
+        var s = myChart.addSeries("Country", dimple.plot.line); // Plot a line chart of the data
+        s.lineMarkers = true;
+        s.interpolation = "cardinal";
+
+        myChart.draw(1000); // Draw the chart. Set the animation delay in miliseconds
+
+
+        svg.selectAll("path.dimple-proj").style("stroke-dasharray", "2"); // Some minor stying changes using the svg selectAll statement. Make the projected data a dashed line and the grid colour lighter.
+        svg.selectAll("path.domain").style("stroke", "#grey");
+        svg.selectAll("g.tick line").style("stroke", "#grey");
+
+
+        document.getElementById("CountryMenu").onchange = function() {
+           var x = document.getElementById("CountryMenu").value;
+           console.log(x);
+           SetCountryData(x);
+           svg.selectAll(".dimple-marker,.dimple-marker-back").remove();
+           myChart.data = chartdata;
+           myChart.draw(1000);
+         }          
+          
+          
+          
+      });
+
+
+</script>
+
+</body>
+</html>
